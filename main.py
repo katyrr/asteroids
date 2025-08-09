@@ -22,7 +22,10 @@ def main():
             if event.type == pg.QUIT:
                 return
         
-        # otherwise update screen
+        # update game
+        player.update(dt)
+
+        # update screen
         screen.fill(BLACK)
         player.draw(screen)
 
