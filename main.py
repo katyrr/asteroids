@@ -11,11 +11,13 @@ def main():
 
     pg.init()
     screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    clock = pg.time.Clock()
+    dt = 0
 
     # infinite game loop:
     while(True):
 
-        # check if user has quit
+        # check if user has closed the window
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 return
@@ -23,6 +25,10 @@ def main():
         # otherwise update screen
         screen.fill(black)
         pg.display.flip()
+
+        # update the clock (60 fps)
+        dt = clock.tick(60) # milliseconds
+        dt /= 1000 # seconds
 
 
 
