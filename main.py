@@ -1,8 +1,6 @@
 import pygame as pg
 from constants import *
-
-black = (0,0,0)
-
+from player import Player
 
 def main():
     print("Starting Asteroids!")
@@ -14,6 +12,8 @@ def main():
     clock = pg.time.Clock()
     dt = 0
 
+    player = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
+
     # infinite game loop:
     while(True):
 
@@ -23,7 +23,9 @@ def main():
                 return
         
         # otherwise update screen
-        screen.fill(black)
+        screen.fill(BLACK)
+        player.draw(screen)
+
         pg.display.flip()
 
         # update the clock (60 fps)
