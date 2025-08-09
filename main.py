@@ -1,4 +1,4 @@
-import pygame as pg
+import pygame
 from constants import *
 from player import Player
 
@@ -7,29 +7,38 @@ def main():
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
 
-    pg.init()
-    screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    clock = pg.time.Clock()
+    pygame.init()
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    clock = pygame.time.Clock()
     dt = 0
 
+    updatables = pygame.sprite.Group()
+    drawables = pygame.sprite.Group()
+    print(updatables)
+    print(drawables)
+
+    Player.containers = (updatables, drawables)
     player = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
+    print(updatables)
+    print(drawables)
 
     # infinite game loop:
     while(True):
 
         # check if user has closed the window
-        for event in pg.event.get():
-            if event.type == pg.QUIT:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
                 return
         
         # update game
-        player.update(dt)
+        updatables.update(dt)
 
         # update screen
         screen.fill(BLACK)
-        player.draw(screen)
+        for d in drawables:
+            d.draw(screen)
 
-        pg.display.flip()
+        pygame.display.flip()
 
         # update the clock (60 fps)
         dt = clock.tick(60) # milliseconds
