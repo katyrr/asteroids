@@ -43,6 +43,12 @@ def main():
             if a.is_colliding_with(player):
                 print("Game over!")
                 return
+            
+            for s in shots:
+                if a.is_colliding_with(s):
+                    a.split()
+                    s.kill()
+            
 
         # update screen
         screen.fill(BLACK)
